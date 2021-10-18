@@ -16,19 +16,20 @@ public class LSaleTicket {
             for (int i = 0; i < 40000; i++) {
                 lTicket.sale();
             }
-        },"AA").start();
+        }, "AA").start();
 
         new Thread(() -> {
             for (int i = 0; i < 40000; i++) {
                 lTicket.sale();
             }
-        },"BB").start();
+        }, "BB").start();
     }
 
 }
 
 class LTicket {
-    private final Lock lock = new ReentrantLock();
+    // 公平锁
+    private final Lock lock = new ReentrantLock(true);
     private int number = 30000;
 
     public void sale() {
