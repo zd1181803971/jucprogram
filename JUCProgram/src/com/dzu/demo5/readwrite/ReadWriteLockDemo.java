@@ -22,6 +22,13 @@ import java.util.concurrent.locks.ReentrantReadWriteLock;
  * @Date 2021/10/26 21:26
  */
 public class ReadWriteLockDemo {
+    /**
+     * 读写锁的缺陷：：
+     *  造成饥饿锁，一直读，没有写
+     *  读的时候不能写，只有读完之后才能写
+     *  写操作可以读
+     * @param args
+     */
     public static void main(String[] args) {
         MyChe myChe = new MyChe();
         for (int i = 0; i < 5; i++) {
@@ -42,7 +49,7 @@ public class ReadWriteLockDemo {
 }
 
 class MyChe {
-    private volatile Map<String, Object> map = new HashMap<>();
+    private  Map<String, Object> map = new HashMap<>();
 
     // 读写锁对象
     ReadWriteLock rwLock = new ReentrantReadWriteLock();
