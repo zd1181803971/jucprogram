@@ -16,20 +16,20 @@ import java.util.concurrent.FutureTask;
  */
 public class CallableDemo {
     public static void main(String[] args) throws ExecutionException, InterruptedException {
-        new Thread(new MyThread1(),"AA").start();
+//        new Thread(new MyThread1(),"AA").start();
 
         // 使用FutureTask
 //        new Thread(new MyThread2(),"AA").start();
-        FutureTask<Integer> futureTask = new FutureTask(MyThread2::new);
+        FutureTask<Integer> futureTask = new FutureTask(new MyThread2());
         FutureTask<Integer> futureTask2 = new FutureTask(()-> 2);
         // futureTask原理  未来任务
-        new Thread(futureTask2,"FF2").start();
+        new Thread(futureTask,"FF2").start();
 
-        while (!futureTask2.isDone()) {
+        while (!futureTask.isDone()) {
             System.out.println("wait...");
         }
-
-        System.out.println(futureTask2.get());
+        Integer integer = futureTask.get();
+        System.out.println(integer);
 
 
     }
